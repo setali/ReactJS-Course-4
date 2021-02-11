@@ -45,6 +45,7 @@ class List extends React.Component {
     componentDidMount() {
         axios('https://jsonplaceholder.typicode.com/users')
             .then(response => this.setState({ users: response.data }))
+            .catch(err => console.log(err))
             .finally(() => {
                 this.setState({loading: false})
             }) 

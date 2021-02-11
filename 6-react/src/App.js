@@ -20,14 +20,27 @@ import { Component } from 'react'
 // import UseEffect from './19-UseEffect'
 // import AdvancedEffectState from './20-AdvancedEffectState'
 // import HooksRules from './21-HooksRules'
-import CustomHook from './22-CustomHook'
+// import CustomHook from './22-CustomHook'
+// import TodosUseState from './23-TodosUseState'
+// import UseReducer from './24-UseReducer'
+// import TodosUseReducer from './25-TodosUseReducer'
+// import UseMemo from './26-UseMemo'
+// import UseRef from './27-UseRef'
+// import UseCallback from './28-UseCallback'
+import Context from './context/App'
 
 class App extends Component {
-
   render () {
     return (
-      <div className="App">
-        <CustomHook />
+      <div className='App'>
+        <Context />
+        {/* <UseCallback /> */}
+        {/* <UseRef /> */}
+        {/* <UseMemo /> */}
+        {/* <TodosUseReducer /> */}
+        {/* <UseReducer /> */}
+        {/* <TodosUseState /> */}
+        {/* <CustomHook /> */}
         {/* <HooksRules /> */}
         {/* <AdvancedEffectState /> */}
         {/* <UseEffect /> */}
@@ -59,7 +72,6 @@ class App extends Component {
       </div>
     )
   }
-
 }
 
-export default App;
+export default App
