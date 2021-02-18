@@ -3,6 +3,7 @@ import ThemeContext from './ThemeContext'
 
 const Home = () => {
   const theme = useContext(ThemeContext)
+
   return (
     <article
       style={{

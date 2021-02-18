@@ -1,12 +1,14 @@
-import { Layout } from 'antd'
-import Header from './generic/Header'
-import Sidebar from './generic/Sidebar'
+import { Route, Switch } from "react-router-dom";
+import { Layout } from "antd";
+import Header from "./generic/Header";
+import Sidebar from "./generic/Sidebar";
 // import Dashboard from './generic/Dashboard'
-import Users from './person/List'
-import 'antd/dist/antd.css'
-import '../assets/css/general.css'
+import PersonRouter from "./person/Router";
+import "antd/dist/antd.css";
+import "../assets/css/general.css";
+import Dashboard from "./generic/Dashboard";
 
-const { Header: AntHeader, Sider, Content, Footer } = Layout
+const { Header: AntHeader, Sider, Content, Footer } = Layout;
 
 function App() {
   return (
@@ -19,9 +21,17 @@ function App() {
           <Sider>
             <Sidebar />
           </Sider>
-          <Content style={{ padding: '20px 80px' }}>
-            {/* <Dashboard /> */}
-            <Users />
+          <Content
+            style={{
+              padding: "20px",
+              backgroundColor: "white",
+              margin: "30px",
+            }}
+          >
+            <Switch>
+              <Route path="/" exact component={Dashboard} />
+              <Route path="/person*" exact component={PersonRouter} />
+            </Switch>
           </Content>
         </Layout>
         <Footer>Footer</Footer>

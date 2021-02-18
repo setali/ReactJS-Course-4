@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import ThemeContext from './ThemeContext'
 import UserContext from './UserContext'
 
@@ -30,7 +31,7 @@ export class Header extends Component {
                       </span>
                     </span>
                   ) : (
-                    <span onClick={login}>Login</span>
+                    <Link to={'/login'}>Login</Link>
                   ))}
               </div>
             )}
