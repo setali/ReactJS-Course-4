@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span id="value"></span>
+    <button id="increment">+</button>
+    <button id="increment2">+2</button>
+    <button id="increment-if-odd">+ if odd</button>
+    <button id="decrement">-</button>
+    <button id="decrement-async">- async</button>
+
+    <script src="./redux.js"></script>
+
+    <script>
+      function reducer (state = 0, action) {
+        console.log(action)
+        switch (action.type) {
+          case 'INCREMENT':
+            return state + (action.payload || 1)
+
+          case 'DECREMENT':
+            return state - (action.payload || 1)
+
+          default:
+            return state
+        }
+      }
+
+      const { getState, dispatch, subscribe } = Redux.createStore(reducer)
+      const value = document.getElementById('value')
+      console.log(getState())
+
+      function render () {
+        value.innerHTML = getState()
+      }
+
+      render()
+      subscribe(render)
+
+      function increment (payload) {
+        return { type: 'INCREMENT', payload }
+      }
+
+      function decrement (payload) {
+        return { type: 'DECREMENT', payload }
+      }
+
+      document.querySelector('#increment').addEventListener('click', () => {
+        dispatch(increment())
+      })
+
+      document.querySelector('#increment2').addEventListener('click', () => {
+        dispatch(increment(2))
+      })
+
+      document
+        .querySelector('#increment-if-odd')
+        .addEventListener('click', () => {
+          if (getState() % 2) {
+            dispatch(increment())
+          }
+        })
+
+      document.querySelector('#decrement').addEventListener('click', () => {
+        dispatch(decrement())
+      })
+
+      document
+        .querySelector('#decrement-async')
+        .addEventListener('click', () => {
+          setTimeout(() => {
+            dispatch(decrement())
+          }, 1000)
+        })
+    </script>
+  </body>
+</html>

@@ -6,7 +6,7 @@ const { SubMenu } = Menu;
 
 function Sider() {
   const handleClick = (e) => {
-    console.log("click ", e);
+    // console.log("click ", e);
   };
 
   return (

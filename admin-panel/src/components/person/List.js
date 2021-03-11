@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import axios from "axios";
 import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import Table from "../utils/Table";
+import { setPersons } from "../../redux/actions/person";
 
 class List extends React.Component {
   state = {
-    users: [],
     loading: true,
   };
 
@@ -54,7 +55,10 @@ class List extends React.Component {
 
   componentDidMount() {
     axios("https://jsonplaceholder.typicode.com/users")
-      .then((response) => this.setState({ users: response.data }))
+      .then((response) => {
+        this.props.setItems(response.data);
+        // this.setState({ users: response.data });
+      })
       .catch((err) => console.log(err))
       .finally(() => {
         this.setState({ loading: false });
@@ -66,7 +70,7 @@ class List extends React.Component {
       <div>
         <Table
           columns={this.columns}
-          data={this.state.users}
+          data={this.props.persons}
           loading={this.state.loading}
         />
       </div>
@@ -74,4 +78,18 @@ class List extends React.Component {
   }
 }
 
-export default List;
+const mapStateToProps = (state) => {
+  return {
+    persons: state.persons,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setItems: function (data) {
+      dispatch(setPersons(data));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

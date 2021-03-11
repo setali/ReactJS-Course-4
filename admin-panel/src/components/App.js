@@ -4,6 +4,7 @@ import Header from "./generic/Header";
 import Sidebar from "./generic/Sidebar";
 // import Dashboard from './generic/Dashboard'
 import PersonRouter from "./person/Router";
+import PostRouter from "./post/Router";
 import "antd/dist/antd.css";
 import "../assets/css/general.css";
 import Dashboard from "./generic/Dashboard";
@@ -31,6 +32,7 @@ function App() {
             <Switch>
               <Route path="/" exact component={Dashboard} />
               <Route path="/person*" exact component={PersonRouter} />
+              <Route path="/post*" exact component={PostRouter} />
             </Switch>
           </Content>
         </Layout>

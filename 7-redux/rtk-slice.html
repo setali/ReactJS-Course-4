@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span id="value"></span>
+    <button id="increment">+</button>
+    <button id="increment2">+2</button>
+    <button id="increment-if-odd">+ if odd</button>
+    <button id="decrement">-</button>
+    <button id="decrement-async">- async</button>
+
+    <script src="./redux-toolkit.umd.js"></script>
+
+    <script>
+      const slice = RTK.createSlice({
+        name: 'counter',
+        initialState: 0,
+        reducers: {
+          increment: (state, action) => state + (action.payload || 1),
+          decrement: (state, action) => state - (action.payload || 1)
+        }
+      })
+
+      const { increment, decrement } = slice.actions
+
+      const { getState, dispatch, subscribe } = RTK.configureStore({
+        reducer: slice.reducer
+      })
+      const value = document.getElementById('value')
+      console.log(getState())
+
+      function render () {
+        value.innerHTML = getState()
+      }
+
+      render()
+      subscribe(render)
+
+      document.querySelector('#increment').addEventListener('click', () => {
+        dispatch(increment())
+      })
+
+      document.querySelector('#increment2').addEventListener('click', () => {
+        dispatch(increment(2))
+      })
+
+      document
+        .querySelector('#increment-if-odd')
+        .addEventListener('click', () => {
+          if (getState() % 2) {
+            dispatch(increment())
+          }
+        })
+
+      document.querySelector('#decrement').addEventListener('click', () => {
+        dispatch(decrement())
+      })
+
+      document
+        .querySelector('#decrement-async')
+        .addEventListener('click', () => {
+          setTimeout(() => {
+            dispatch(decrement())
+          }, 1000)
+        })
+    </script>
+  </body>
+</html>

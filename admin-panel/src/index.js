@@ -1,18 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
 import fa from "antd/es/locale/fa_IR";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
+import store from "./redux/store";
 
 ReactDOM.render(
   <ConfigProvider locale={fa} direction="rtl">
-    <React.StrictMode>
+    <Provider store={store}>
+      {/* <React.StrictMode> */}
       <Router>
         <App />
       </Router>
-    </React.StrictMode>
+      {/* </React.StrictMode> */}
+    </Provider>
   </ConfigProvider>,
   document.getElementById("root")
 );
